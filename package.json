@@ -1,0 +1,30 @@
+{
+  "name": "pirple-node-masterclass-assignments",
+  "version": "1.0.0",
+  "description": "Node Masterclass Homework Assignments",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skawaguchi/pirple-node-masterclass-assignments.git"
+  },
+  "author": "Stephen Kawaguchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skawaguchi/pirple-node-masterclass-assignments/issues"
+  },
+  "homepage": "https://github.com/skawaguchi/pirple-node-masterclass-assignments#readme",
+  "devDependencies": {
+    "jest": "^23.4.2",
+    "sinon": "^6.1.4",
+    "supertest": "^3.1.0"
+  },
+  "jest": {
+    "bail": true,
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "dependencies": {}
+}
