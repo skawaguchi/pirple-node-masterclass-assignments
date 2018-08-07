@@ -8,7 +8,8 @@ Please create a simple "Hello World" API. Meaning:
 2. When someone posts anything to the route /hello, you should return a welcome message, in JSON format. This message can be anything you want.
 
 ## Setup
-1. Run `nvm use`
+This assumes you have `nvm` installed. If you don't, skip the next step but be warned that this app expects Node 8 or greater and may not work.
+1. Run `nvm use`.
 1. Run `npm i`
 
 ## Running the Default Staging Server
