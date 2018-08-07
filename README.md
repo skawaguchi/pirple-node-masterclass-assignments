@@ -22,3 +22,6 @@ Please create a simple "Hello World" API. Meaning:
 
 ## Running Tests
 1. `npm test`
+
+## Development Notes
+- Had to use `SERVER_ENV` because Jest automatically sets `NODE_ENV=test`.
