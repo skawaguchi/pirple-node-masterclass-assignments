@@ -1,58 +1,44 @@
 const request = require('supertest');
 
-const server = require('../../srcserver');
+const server = require('../../src/server');
 
 describe('API Server', () => {
-    const testEnvironments = [
-        {
-            name: 'staging',
-            port: 8888
-        },
-        {
-            name: 'production',
-            port: 8888
-        }
-    ];
-
     afterEach(() => {
         delete process.env.SERVER_ENV;
     });
 
-    it('should start the staging server at port 5555', async () => {
-        server.start();
+    const testEnvironments = [
+        {
+            envName: 'production',
+            port: 8888
+        },
+        {
+            envName: 'staging',
+            port: 5555
+        }
+    ];
 
-        const url = 'http://localhost:5555';
+    const testBasicServer = (environment) => {
+        it(`should start the staging ${environment.envName} at port ${environment.port}`, async () => {
+            process.env.SERVER_ENV = environment.envName;
 
-        const app = request(url)
+            server.start();
 
-        const fakeRouteResponse = await app.get('/some-fake-url');
+            const url = `http://localhost:${environment.port}`;
 
-        expect(fakeRouteResponse.statusCode).toBe(404);
+            const app = request(url)
 
-        const helloRouteResponse = await app.get('/hello');
+            const fakeRouteResponse = await app.get('/some-fake-url');
 
-        expect(helloRouteResponse.statusCode).toBe(200);
+            expect(fakeRouteResponse.statusCode).toBe(404);
 
-        server.stop();
-    });
+            const helloRouteResponse = await app.get('/hello');
 
-    it('should start the production server at port 8888', async () => {
-        process.env.SERVER_ENV = 'production';
+            expect(helloRouteResponse.statusCode).toBe(200);
 
-        server.start();
+            server.stop();
+        });
+    };
 
-        const url = 'http://localhost:8888';
-
-        const app = request(url)
-
-        const fakeRouteResponse = await app.get('/some-fake-url');
-
-        expect(fakeRouteResponse.statusCode).toBe(404);
-
-        const helloRouteResponse = await app.get('/hello');
-
-        expect(helloRouteResponse.statusCode).toBe(200);
-
-        server.stop();
-    });
+    testEnvironments.forEach((environment) => testBasicServer(environment));
 });
